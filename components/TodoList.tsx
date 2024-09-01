@@ -45,11 +45,16 @@ export default function TodoList({ session }: { session: Session }) {
   }
 
   const deleteTodo = async (id: number) => {
-    try {
-      await supabase.from('todos').delete().eq('id', id).throwOnError()
-      setTodos(todos.filter((x) => x.id != id))
-    } catch (error) {
-      console.log('error', error)
+    const confirmation = confirm("Are you sure you want to delete the todo?");
+    
+
+    if (confirmation) {
+      try {
+        await supabase.from('todos').delete().eq('id', id).throwOnError()
+        setTodos(todos.filter((x) => x.id != id))
+      } catch (error) {
+        console.log('error', error)
+      }
     }
   }
 
@@ -73,7 +78,7 @@ export default function TodoList({ session }: { session: Session }) {
             setNewTaskText(e.target.value)
           }}
         />
-        <button className="btn-black" type="submit">
+        <button className="px-4 py-2 font-bold rounded bg-green-500 hover:bg-green-400" type="submit">
           Add
         </button>
       </form>

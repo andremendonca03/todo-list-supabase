@@ -37,7 +37,7 @@ export default function Home() {
           >
             <TodoList session={session} />
             <button
-              className="btn-black w-full mt-12"
+              className="py-4 rounded bg-red-400 w-full mt-12 hover:bg-red-500"
               onClick={async () => {
                 const { error } = await supabase.auth.signOut()
                 if (error) console.log('Error logging out:', error.message)
